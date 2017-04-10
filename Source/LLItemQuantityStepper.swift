@@ -148,6 +148,10 @@ open class LLItemQuantityStepper: UIView {
         }
         
     }
+
+    open func removeTapped() {
+        removeBlock?()
+    }
     
     open func increaseValue() {
         let newValue = _currentValue + 1
@@ -160,7 +164,7 @@ open class LLItemQuantityStepper: UIView {
     open func decreaseValue() {
         let newValue = _currentValue - 1
         if newValue == (minimumValue - 1) {
-            removeBlock?()
+            removeTapped()
             return
         }
         if newValue < minimumValue {
