@@ -149,10 +149,6 @@ open class LLItemQuantityStepper: UIView {
         
     }
 
-    open func removeTapped() {
-        removeBlock?()
-    }
-    
     open func increaseValue() {
         let newValue = _currentValue + 1
         guard newValue <= maximumValue else {
@@ -174,5 +170,9 @@ open class LLItemQuantityStepper: UIView {
             
         }
         _currentValue = newValue
+    }
+
+    open func removeButtonTapped() {
+        removeBlock?()
     }
 }
