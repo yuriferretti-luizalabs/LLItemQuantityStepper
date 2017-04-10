@@ -149,7 +149,7 @@ open class LLItemQuantityStepper: UIView {
         
     }
     
-    @objc private func increaseValue() {
+    open func increaseValue() {
         let newValue = _currentValue + 1
         guard newValue <= maximumValue else {
             return
@@ -157,7 +157,7 @@ open class LLItemQuantityStepper: UIView {
         _currentValue = newValue
     }
     
-    @objc private func decreaseValue() {
+    open func decreaseValue() {
         let newValue = _currentValue - 1
         if newValue == (minimumValue - 1) {
             removeBlock?()
