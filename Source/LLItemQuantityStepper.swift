@@ -60,8 +60,8 @@ open class LLItemQuantityStepper: UIView {
     
     open var maximumValue: Int = 10 {
         didSet {
-            if _currentValue > minimumValue {
-                _currentValue = minimumValue
+            if _currentValue > maximumValue {
+                _currentValue = maximumValue
             }
         }
     }
