@@ -16,7 +16,7 @@ open class LLItemQuantityStepper: UIView {
     private let currentValueLabel = UILabel()
     private let stackView = UIStackView()
     public typealias RemoveBlock = ((Void) -> Void)
-    public var removeBlock: RemoveBlock?
+    open var removeBlock: RemoveBlock?
     
     open override var tintColor: UIColor! {
         didSet {
@@ -34,7 +34,7 @@ open class LLItemQuantityStepper: UIView {
     }
     
     
-    public var currentValue: Int {
+    open var currentValue: Int {
         get {
             return _currentValue
         }
@@ -50,7 +50,7 @@ open class LLItemQuantityStepper: UIView {
     }
     
     
-    public var minimumValue: Int = 0 {
+    open var minimumValue: Int = 0 {
         didSet {
             if _currentValue < minimumValue {
                 _currentValue = minimumValue
@@ -58,7 +58,7 @@ open class LLItemQuantityStepper: UIView {
         }
     }
     
-    public var maximumValue: Int = 10 {
+    open var maximumValue: Int = 10 {
         didSet {
             if _currentValue > minimumValue {
                 _currentValue = minimumValue
@@ -66,30 +66,30 @@ open class LLItemQuantityStepper: UIView {
         }
     }
     
-    var increaseLabel: String = "+" {
+    open var increaseLabel: String = "+" {
         didSet {
             increaseButton.setTitle(increaseLabel, for: .normal)
         }
     }
     
-    var decreaseLabel: String = "-" {
+    open var decreaseLabel: String = "-" {
         didSet {
             decreaseButton.setTitle(decreaseLabel, for: .normal)
         }
     }
     
-    var removeImage: UIImage? {
+    open var removeImage: UIImage? {
         didSet {
             updateUIForValue(_currentValue)
         }
     }
     
-    public override init(frame: CGRect) {
+    open override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    open required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
