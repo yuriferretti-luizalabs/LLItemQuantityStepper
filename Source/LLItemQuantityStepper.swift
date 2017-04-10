@@ -15,10 +15,10 @@ open class LLItemQuantityStepper: UIView {
     private let increaseButton = UIButton()
     private let currentValueLabel = UILabel()
     private let stackView = UIStackView()
-    typealias RemoveBlock = ((Void) -> Void)
-    var removeBlock: RemoveBlock?
+    public typealias RemoveBlock = ((Void) -> Void)
+    public var removeBlock: RemoveBlock?
     
-    override var tintColor: UIColor! {
+    open override var tintColor: UIColor! {
         didSet {
             layer.borderColor = tintColor.cgColor
             increaseButton.setTitleColor(tintColor, for: .normal)
