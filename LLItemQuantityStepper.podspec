@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "LLItemQuantityStepper"
-  s.version      = "0.0.12"
+  s.version      = "0.0.13"
   s.summary      = "Custom basket stepper"
 
   s.description  = <<-DESC 

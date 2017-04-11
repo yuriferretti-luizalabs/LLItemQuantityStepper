@@ -1,12 +1,3 @@
-
-//
-//  ItemQuantityStepper.swift
-//  Stepper Teste
-//
-//  Created by Yuri Ferretti on 4/10/17.
-//  Copyright © 2017 yuri. All rights reserved.
-//
-
 import UIKit
 
 open class LLItemQuantityStepper: UIView {
@@ -126,7 +117,7 @@ open class LLItemQuantityStepper: UIView {
         decreaseButton.setTitle(decreaseLabel, for: .normal)
         decreaseButton.setTitleColor(.black, for: .normal)
         decreaseButton.setTitleColor(.lightGray, for: .disabled)
-        increaseButton.setTitle(decreaseLabel, for: .normal)
+        increaseButton.setTitle(increaseLabel, for: .normal)
         increaseButton.setTitleColor(.black, for: .normal)
         increaseButton.setTitleColor(.lightGray, for: .disabled)
         currentValue = 0
