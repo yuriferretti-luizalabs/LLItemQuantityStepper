@@ -27,6 +27,14 @@ open class LLItemQuantityStepper: UIView {
         }
     }
     
+    open var font: UIFont = .systemFont(ofSize: 15) {
+        didSet {
+            [currentValueLabel, increaseButton.titleLabel, decreaseButton.titleLabel].forEach {
+                $0?.font = font
+            }
+        }
+    }
+    
     private var _currentValue: Int = 0 {
         didSet {
            updateUIForValue(_currentValue)
