@@ -123,15 +123,16 @@ open class LLItemQuantityStepper: UIView {
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
-        decreaseButton.setTitle("-", for: .normal)
+        decreaseButton.setTitle(decreaseLabel, for: .normal)
         decreaseButton.setTitleColor(.black, for: .normal)
         decreaseButton.setTitleColor(.lightGray, for: .disabled)
-        increaseButton.setTitle("+", for: .normal)
+        increaseButton.setTitle(decreaseLabel, for: .normal)
         increaseButton.setTitleColor(.black, for: .normal)
         increaseButton.setTitleColor(.lightGray, for: .disabled)
         currentValue = 0
         currentValueLabel.textColor = .darkText
         currentValueLabel.textAlignment = .center
+        currentValueLabel.isUserInteractionEnabled = false
         layer.cornerRadius = 12
         layer.borderColor = UIColor.lightGray.cgColor
         layer.borderWidth = 1
@@ -143,9 +144,20 @@ open class LLItemQuantityStepper: UIView {
         decreaseButton.addTarget(self, action: decrease, for: .touchUpInside)
     }
     
+    open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        
+        guard self.point(inside: point, with: event) else {
+            return nil
+        }
+        let buttonThreshold = stackView.bounds.width / 2
+        let stackViewPoint = convert(point, to: stackView)
+        return (stackViewPoint.x <= buttonThreshold) ? decreaseButton : increaseButton
+    }
+    
     private func updateUIForValue(_ value: Int) {
         currentValueLabel.text = String(describing: _currentValue)
-        increaseButton.isEnabled = (_currentValue < maximumValue)
+        let increaseTitleColor = (value == maximumValue) ? .lightGray : tintColor
+        increaseButton.setTitleColor(increaseTitleColor, for: .normal)
         
         if value == minimumValue, let image = removeImage {
             decreaseButton.setTitle(nil, for: .normal)
