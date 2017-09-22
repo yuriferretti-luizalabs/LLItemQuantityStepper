@@ -1,13 +1,11 @@
 import UIKit
 
-open class LLItemQuantityStepper: UIView {
+open class LLItemQuantityStepper: UIControl {
     
     private let decreaseButton = UIButton()
     private let increaseButton = UIButton()
     private let currentValueLabel = UILabel()
     private let stackView = UIStackView()
-    public typealias RemoveBlock = ((Void) -> Void)
-    open var removeBlock: RemoveBlock?
     
     open override var tintColor: UIColor! {
         didSet {
@@ -28,7 +26,7 @@ open class LLItemQuantityStepper: UIView {
     
     private var _currentValue: Int = 0 {
         didSet {
-           updateUIForValue(_currentValue)
+            updateUIForValue(_currentValue)
         }
     }
     
@@ -38,20 +36,14 @@ open class LLItemQuantityStepper: UIView {
             return _currentValue
         }
         set {
-            if newValue < minimumValue {
-                _currentValue = minimumValue
-            } else if newValue > maximumValue {
-                _currentValue = maximumValue
-            } else {
-                _currentValue = newValue
-            }
+            _currentValue = max(min(newValue, maximumValue), minimumValue)
         }
     }
     
     
     open var minimumValue: Int = 0 {
         didSet {
-            if _currentValue < minimumValue {
+            if (minimumValue >= 0) && (_currentValue < minimumValue) {
                 _currentValue = minimumValue
             }
         }
@@ -159,31 +151,35 @@ open class LLItemQuantityStepper: UIView {
         }
         
     }
-
-    open func increaseValue() {
+    
+    @objc open func increaseValue() {
         let newValue = _currentValue + 1
         guard newValue <= maximumValue else {
             return
         }
         _currentValue = newValue
+        sendActions(for: .valueChanged)
+        if #available(iOS 10.0, *) {
+            selectionChangedFeedback()
+        }
     }
     
-    open func decreaseValue() {
+    @objc open func decreaseValue() {
         let newValue = _currentValue - 1
-        if newValue == (minimumValue - 1) {
-            removeButtonTapped()
+        guard newValue >= minimumValue else {
             return
-        }
-        if newValue < minimumValue {
-            return
-        } else if newValue == minimumValue {
-            updateUIForValue(newValue)
-            
         }
         _currentValue = newValue
+        sendActions(for: .valueChanged)
+        if #available(iOS 10.0, *) {
+            selectionChangedFeedback()
+        }
     }
-
-    open func removeButtonTapped() {
-        removeBlock?()
+    
+    @available(iOS 10.0, *)
+    private func selectionChangedFeedback() {
+        let generator = UISelectionFeedbackGenerator()
+        generator.prepare()
+        generator.selectionChanged()
     }
 }
